@@ -1,0 +1,56 @@
+{
+  "name": "@kooperativa-team/n8n-nodes-kooperativa",
+  "version": "0.1.0",
+  "description": "n8n community node for the Kooperativa API — enrich and search professional profiles and companies, hiring signals, job changes, and webhook monitors.",
+  "keywords": [
+    "n8n-community-node-package",
+    "kooperativa",
+    "b2b",
+    "enrichment",
+    "data-enrichment"
+  ],
+  "license": "MIT",
+  "homepage": "https://kooperativa.io",
+  "author": {
+    "name": "Kooperativa",
+    "email": "support@kooperativa.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kooperativa-team/n8n-nodes-kooperativa.git"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-icons.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "eslint nodes credentials",
+    "lintfix": "eslint nodes credentials --fix",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/KooperativaApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Kooperativa/Kooperativa.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "n8n-core": "^1.80.0",
+    "n8n-workflow": "^1.80.0",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
