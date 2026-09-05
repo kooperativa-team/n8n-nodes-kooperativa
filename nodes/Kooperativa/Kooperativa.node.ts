@@ -8,7 +8,7 @@ export class Kooperativa implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'kooperativa.io',
 		name: 'kooperativa',
-		icon: { light: 'file:kooperativa.svg', dark: 'file:kooperativa.svg' },
+		icon: { light: 'file:kooperativa.svg', dark: 'file:kooperativa.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',

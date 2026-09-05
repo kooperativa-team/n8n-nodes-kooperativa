@@ -9,6 +9,10 @@ const files = [
 		from: path.join(__dirname, '..', 'nodes', 'Kooperativa', 'kooperativa.svg'),
 		to: path.join(__dirname, '..', 'dist', 'nodes', 'Kooperativa', 'kooperativa.svg'),
 	},
+	{
+		from: path.join(__dirname, '..', 'nodes', 'Kooperativa', 'kooperativa.dark.svg'),
+		to: path.join(__dirname, '..', 'dist', 'nodes', 'Kooperativa', 'kooperativa.dark.svg'),
+	},
 ];
 
 for (const { from, to } of files) {

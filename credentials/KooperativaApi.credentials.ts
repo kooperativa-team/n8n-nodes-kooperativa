@@ -4,7 +4,7 @@ export class KooperativaApi implements ICredentialType {
 	name = 'kooperativaApi';
 	displayName = 'kooperativa.io API';
 	documentationUrl = 'https://docs.kooperativa.io';
-	icon: ICredentialType['icon'] = { light: 'file:../nodes/Kooperativa/kooperativa.svg', dark: 'file:../nodes/Kooperativa/kooperativa.svg' };
+	icon: ICredentialType['icon'] = { light: 'file:../nodes/Kooperativa/kooperativa.svg', dark: 'file:../nodes/Kooperativa/kooperativa.dark.svg' };
 
 	properties: INodeProperties[] = [
 		{
