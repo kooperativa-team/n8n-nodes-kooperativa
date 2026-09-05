@@ -110,12 +110,12 @@ const enrichOrCheckOps = {
 
 export const companyEnrichFields: INodeProperties[] = [
 	{
-		displayName: 'LinkedIn URL',
+		displayName: 'Profile URL',
 		name: 'linkedinUrl',
 		type: 'string',
 		default: '',
-		placeholder: 'https://www.linkedin.com/company/argus-media',
-		description: 'Full company profile URL. Provide exactly one of LinkedIn URL, Username, Company ID, or ID.',
+		placeholder: 'https://www.example.com/company/acme-corp',
+		description: 'Full company profile URL. Provide exactly one of Profile URL, Username, Company ID, or ID.',
 		displayOptions: { show: enrichOrCheckOps },
 		routing: { send: { type: 'query', property: 'linkedin_url' } },
 	},

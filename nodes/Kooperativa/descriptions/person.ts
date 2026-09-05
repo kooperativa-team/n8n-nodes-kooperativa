@@ -101,7 +101,7 @@ export const personOperations: INodeProperties = {
 	default: 'enrich',
 };
 
-// ── Enrich / Check: one of linkedin_url, username, or id ─────────────────
+// ── Enrich / Check: one of linkedin_url, username, or id (all resolve the same profile) ─
 
 const enrichOrCheckOps = {
 	resource: ['person'],
@@ -110,12 +110,12 @@ const enrichOrCheckOps = {
 
 export const personEnrichFields: INodeProperties[] = [
 	{
-		displayName: 'LinkedIn URL',
+		displayName: 'Profile URL',
 		name: 'linkedinUrl',
 		type: 'string',
 		default: '',
-		placeholder: 'https://www.linkedin.com/in/satyanadella',
-		description: 'Full profile URL. Provide exactly one of LinkedIn URL, Username, or ID.',
+		placeholder: 'https://www.example.com/in/username',
+		description: 'Full profile URL. Provide exactly one of Profile URL, Username, or ID.',
 		displayOptions: { show: enrichOrCheckOps },
 		routing: {
 			send: { type: 'query', property: 'linkedin_url' },
@@ -315,7 +315,7 @@ export const personBulkEnrichFields: INodeProperties[] = [
 		displayName: 'Profiles',
 		name: 'profilesJson',
 		type: 'json',
-		default: '[\n  { "username": "satyanadella" },\n  { "linkedin_url": "https://www.linkedin.com/in/williamhgates" }\n]',
+		default: '[\n  { "username": "example-user" },\n  { "linkedin_url": "https://www.example.com/in/another-user" }\n]',
 		description:
 			'Array of up to 100 identifiers. Each item must have exactly one of id, username, or linkedin_url.',
 		displayOptions: { show: bulkOps },
