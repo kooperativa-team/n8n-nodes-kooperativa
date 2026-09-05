@@ -1,6 +1,6 @@
 {
   "name": "@kooperativa_team/n8n-nodes-kooperativa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n community node for the Kooperativa API — enrich and search professional profiles and companies, hiring signals, job changes, and webhook monitors.",
   "keywords": [
     "n8n-community-node-package",
