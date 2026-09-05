@@ -2,7 +2,7 @@ import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, INo
 
 export class KooperativaApi implements ICredentialType {
 	name = 'kooperativaApi';
-	displayName = 'Kooperativa API';
+	displayName = 'kooperativa.io API';
 	documentationUrl = 'https://docs.kooperativa.io';
 
 	properties: INodeProperties[] = [

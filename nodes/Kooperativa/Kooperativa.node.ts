@@ -6,16 +6,16 @@ import { accountDescription } from './descriptions/account';
 
 export class Kooperativa implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Kooperativa',
+		displayName: 'kooperativa.io',
 		name: 'kooperativa',
 		icon: 'file:kooperativa.png',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
-		description: 'Enrich and search professional profiles and companies with the Kooperativa API',
+		description: 'Enrich and search professional profiles and companies with the kooperativa.io API',
 		usableAsTool: true,
 		defaults: {
-			name: 'Kooperativa',
+			name: 'kooperativa.io',
 		},
 		inputs: ['main'],
 		outputs: ['main'],

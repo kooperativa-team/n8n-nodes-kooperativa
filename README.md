@@ -1,4 +1,4 @@
-# @kooperativa-team/n8n-nodes-kooperativa
+# @kooperativa_team/n8n-nodes-kooperativa
 
 n8n community node for the [Kooperativa](https://kooperativa.io) API. Enrich and search professional profiles and companies, track hiring signals and job changes, and manage webhook monitors, directly inside an n8n workflow.
 
@@ -6,7 +6,7 @@ n8n community node for the [Kooperativa](https://kooperativa.io) API. Enrich and
 
 Requires a Kooperativa API key. Get one from your [account dashboard](https://kooperativa.io/api-keys).
 
-Follow the n8n [community node installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) using the package name `@kooperativa-team/n8n-nodes-kooperativa`.
+Follow the n8n [community node installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) using the package name `@kooperativa_team/n8n-nodes-kooperativa`.
 
 ## Credentials
 
