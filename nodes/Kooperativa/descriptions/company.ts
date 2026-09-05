@@ -14,18 +14,6 @@ export const companyOperations: INodeProperties = {
 	},
 	options: [
 		{
-			name: 'Enrich',
-			value: 'enrich',
-			action: 'Enrich a company',
-			description: "Return a company's full profile by URL, username, company ID, or ID",
-			routing: {
-				request: {
-					method: 'GET',
-					url: '/company',
-				},
-			},
-		},
-		{
 			name: 'Check Exists',
 			value: 'check',
 			action: 'Check if a company exists',
@@ -38,14 +26,14 @@ export const companyOperations: INodeProperties = {
 			},
 		},
 		{
-			name: 'Search',
-			value: 'search',
-			action: 'Search companies',
-			description: 'Search the data lake of companies by name, location, industry, and headcount',
+			name: 'Enrich',
+			value: 'enrich',
+			action: 'Enrich a company',
+			description: "Return a company's full profile by URL, username, company ID, or ID",
 			routing: {
 				request: {
-					method: 'POST',
-					url: '/companies/search',
+					method: 'GET',
+					url: '/company',
 				},
 			},
 		},
@@ -58,18 +46,6 @@ export const companyOperations: INodeProperties = {
 				request: {
 					method: 'GET',
 					url: '/company/current-employees',
-				},
-			},
-		},
-		{
-			name: 'Get Past Employees',
-			value: 'pastEmployees',
-			action: 'Get past employees',
-			description: 'List people who previously worked at a company, with their past role there',
-			routing: {
-				request: {
-					method: 'GET',
-					url: '/company/past-employees',
 				},
 			},
 		},
@@ -94,6 +70,30 @@ export const companyOperations: INodeProperties = {
 				request: {
 					method: 'GET',
 					url: '/company/hiring-signals',
+				},
+			},
+		},
+		{
+			name: 'Get Past Employees',
+			value: 'pastEmployees',
+			action: 'Get past employees',
+			description: 'List people who previously worked at a company, with their past role there',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '/company/past-employees',
+				},
+			},
+		},
+		{
+			name: 'Search',
+			value: 'search',
+			action: 'Search companies',
+			description: 'Search the data lake of companies by name, location, industry, and headcount',
+			routing: {
+				request: {
+					method: 'POST',
+					url: '/companies/search',
 				},
 			},
 		},

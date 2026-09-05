@@ -14,14 +14,14 @@ export const personOperations: INodeProperties = {
 	},
 	options: [
 		{
-			name: 'Enrich',
-			value: 'enrich',
-			action: 'Enrich a person',
-			description: "Return a person's full professional profile by URL, username, or ID",
+			name: 'Bulk Enrich',
+			value: 'bulkEnrich',
+			action: 'Bulk enrich people',
+			description: 'Enrich up to 100 profiles in a single request',
 			routing: {
 				request: {
-					method: 'GET',
-					url: '/person',
+					method: 'POST',
+					url: '/people/bulk-enrich',
 				},
 			},
 		},
@@ -38,38 +38,38 @@ export const personOperations: INodeProperties = {
 			},
 		},
 		{
-			name: 'Search',
-			value: 'search',
-			action: 'Search people',
-			description: 'Search the data lake of profiles using any combination of filters',
+			name: 'Enrich',
+			value: 'enrich',
+			action: 'Enrich a person',
+			description: "Return a person's full professional profile by URL, username, or ID",
 			routing: {
 				request: {
-					method: 'POST',
-					url: '/people/search',
-				},
-			},
-		},
-		{
-			name: 'Bulk Enrich',
-			value: 'bulkEnrich',
-			action: 'Bulk enrich people',
-			description: 'Enrich up to 100 profiles in a single request',
-			routing: {
-				request: {
-					method: 'POST',
-					url: '/people/bulk-enrich',
+					method: 'GET',
+					url: '/person',
 				},
 			},
 		},
 		{
 			name: 'Get Colleagues',
 			value: 'colleagues',
-			action: "Get a person's colleagues",
+			action: 'Get colleagues of a person',
 			description: 'Return the current colleagues of a person, everyone at the same company right now',
 			routing: {
 				request: {
 					method: 'GET',
 					url: '/person/colleagues',
+				},
+			},
+		},
+		{
+			name: 'Get Job Changes',
+			value: 'jobChanges',
+			action: 'Get recent job changes',
+			description: 'People who recently started a new job, optionally filtered by previous employer',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '/person/job-changes',
 				},
 			},
 		},
@@ -86,14 +86,14 @@ export const personOperations: INodeProperties = {
 			},
 		},
 		{
-			name: 'Get Job Changes',
-			value: 'jobChanges',
-			action: 'Get recent job changes',
-			description: 'People who recently started a new job, optionally filtered by previous employer',
+			name: 'Search',
+			value: 'search',
+			action: 'Search people',
+			description: 'Search the data lake of profiles using any combination of filters',
 			routing: {
 				request: {
-					method: 'GET',
-					url: '/person/job-changes',
+					method: 'POST',
+					url: '/people/search',
 				},
 			},
 		},
@@ -255,6 +255,29 @@ export const personSearchFields: INodeProperties[] = [
 				routing: { send: { type: 'body', property: 'city' } },
 			},
 			{
+				displayName: 'Education (School Name)',
+				name: 'education',
+				type: 'string',
+				default: '',
+				routing: { send: { type: 'body', property: 'education' } },
+			},
+			{
+				displayName: 'Job Changed After (Unix Timestamp)',
+				name: 'jobChangedAfter',
+				type: 'number',
+				default: 0,
+				description: 'Only people whose current role started after this Unix timestamp (seconds)',
+				routing: { send: { type: 'body', property: 'job_changed_after' } },
+			},
+			{
+				displayName: 'Past Company',
+				name: 'pastCompany',
+				type: 'string',
+				default: '',
+				description: 'Match people who previously worked at this company',
+				routing: { send: { type: 'body', property: 'past_company' } },
+			},
+			{
 				displayName: 'Skills',
 				name: 'skills',
 				type: 'string',
@@ -269,35 +292,12 @@ export const personSearchFields: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Past Company',
-				name: 'pastCompany',
-				type: 'string',
-				default: '',
-				description: 'Match people who previously worked at this company',
-				routing: { send: { type: 'body', property: 'past_company' } },
-			},
-			{
-				displayName: 'Education (School Name)',
-				name: 'education',
-				type: 'string',
-				default: '',
-				routing: { send: { type: 'body', property: 'education' } },
-			},
-			{
 				displayName: 'Tenure Minimum (Months)',
 				name: 'tenureMinMonths',
 				type: 'number',
 				default: 0,
 				description: 'Only people who have held their current role for at least this many months',
 				routing: { send: { type: 'body', property: 'tenure_min_months' } },
-			},
-			{
-				displayName: 'Job Changed After (Unix Timestamp)',
-				name: 'jobChangedAfter',
-				type: 'number',
-				default: 0,
-				description: 'Only people whose current role started after this Unix timestamp (seconds)',
-				routing: { send: { type: 'body', property: 'job_changed_after' } },
 			},
 		],
 	},
@@ -317,7 +317,7 @@ export const personBulkEnrichFields: INodeProperties[] = [
 		type: 'json',
 		default: '[\n  { "username": "example-user" },\n  { "linkedin_url": "https://www.example.com/in/another-user" }\n]',
 		description:
-			'Array of up to 100 identifiers. Each item must have exactly one of id, username, or linkedin_url.',
+			'Array of up to 100 identifiers. Each item must have exactly one of ID, username, or linkedin_url.',
 		displayOptions: { show: bulkOps },
 		routing: {
 			send: {

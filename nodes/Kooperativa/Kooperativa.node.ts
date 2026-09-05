@@ -1,4 +1,4 @@
-import type { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
 import { personDescription } from './descriptions/person';
 import { companyDescription } from './descriptions/company';
 import { monitorDescription } from './descriptions/monitor';
@@ -8,7 +8,7 @@ export class Kooperativa implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'kooperativa.io',
 		name: 'kooperativa',
-		icon: 'file:kooperativa.png',
+		icon: { light: 'file:kooperativa.svg', dark: 'file:kooperativa.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
@@ -17,8 +17,8 @@ export class Kooperativa implements INodeType {
 		defaults: {
 			name: 'kooperativa.io',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'kooperativaApi',

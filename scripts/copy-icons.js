@@ -6,8 +6,8 @@ const path = require('path');
 
 const files = [
 	{
-		from: path.join(__dirname, '..', 'nodes', 'Kooperativa', 'kooperativa.png'),
-		to: path.join(__dirname, '..', 'dist', 'nodes', 'Kooperativa', 'kooperativa.png'),
+		from: path.join(__dirname, '..', 'nodes', 'Kooperativa', 'kooperativa.svg'),
+		to: path.join(__dirname, '..', 'dist', 'nodes', 'Kooperativa', 'kooperativa.svg'),
 	},
 ];
 
