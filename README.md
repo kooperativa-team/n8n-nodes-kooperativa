@@ -41,7 +41,7 @@ Create a **Kooperativa API** credential in n8n with your API key. The node authe
 - Get Info — license status and usage breakdown
 - Health Check — API liveness probe
 
-Full parameter reference: [docs.kooperativa.io](https://docs.kooperativa.io), or the OpenAPI spec at `https://kooperativa.io/api/v1/openapi.json`.
+Full parameter reference: [docs.kooperativa.io](https://docs.kooperativa.io).
 
 ## License
 
