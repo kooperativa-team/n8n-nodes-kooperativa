@@ -50,6 +50,19 @@ export const personOperations: INodeProperties = {
 			},
 		},
 		{
+			name: 'Enrich (Realtime)',
+			value: 'enrichRealtime',
+			action: 'Enrich a person in realtime',
+			description:
+				'Read the profile from the live source instead of the data lake. Metered at $0.001 per call, billed even when the profile is not found. Prefer Enrich, which is included in the license.',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '/person/realtime',
+				},
+			},
+		},
+		{
 			name: 'Get Colleagues',
 			value: 'colleagues',
 			action: 'Get colleagues of a person',
@@ -142,6 +155,44 @@ export const personEnrichFields: INodeProperties[] = [
 		displayOptions: { show: enrichOrCheckOps },
 		routing: {
 			send: { type: 'query', property: 'id' },
+		},
+	},
+];
+
+// ── Enrich (Realtime): URL or username only, no ID ─────────────────────
+
+/* Its own group rather than being folded into enrichOrCheckOps, because that
+   group also renders the Kooperativa ID field, and the realtime endpoint does
+   not accept an ID: an internal id means nothing to a source that has never
+   seen the data lake. Showing it would offer an input the API rejects. */
+const realtimeOps = {
+	resource: ['person'],
+	operation: ['enrichRealtime'],
+};
+
+export const personRealtimeFields: INodeProperties[] = [
+	{
+		displayName: 'Profile URL',
+		name: 'linkedinUrl',
+		type: 'string',
+		default: '',
+		placeholder: 'https://www.example.com/in/username',
+		description: 'Full profile URL. Provide exactly one of Profile URL or Username.',
+		displayOptions: { show: realtimeOps },
+		routing: {
+			send: { type: 'query', property: 'linkedin_url' },
+		},
+	},
+	{
+		displayName: 'Username',
+		name: 'username',
+		type: 'string',
+		default: '',
+		placeholder: 'satyanadella',
+		description: 'Profile slug, the part after /in/. Fastest lookup.',
+		displayOptions: { show: realtimeOps },
+		routing: {
+			send: { type: 'query', property: 'username' },
 		},
 	},
 ];
@@ -415,6 +466,7 @@ export const personJobChangesFields: INodeProperties[] = [
 export const personDescription: INodeProperties[] = [
 	personOperations,
 	...personEnrichFields,
+	...personRealtimeFields,
 	...personSearchFields,
 	...personBulkEnrichFields,
 	...personRelatedFields,

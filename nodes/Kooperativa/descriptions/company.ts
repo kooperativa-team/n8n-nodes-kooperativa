@@ -38,6 +38,19 @@ export const companyOperations: INodeProperties = {
 			},
 		},
 		{
+			name: 'Enrich (Realtime)',
+			value: 'enrichRealtime',
+			action: 'Enrich a company in realtime',
+			description:
+				'Read the company from the live source instead of the data lake. Metered at $0.001 per call, billed even when the company is not found. Prefer Enrich, which is included in the license.',
+			routing: {
+				request: {
+					method: 'GET',
+					url: '/company/realtime',
+				},
+			},
+		},
+		{
 			name: 'Get Current Employees',
 			value: 'currentEmployees',
 			action: 'Get current employees',
@@ -146,6 +159,40 @@ export const companyEnrichFields: INodeProperties[] = [
 		description: 'Kooperativa internal company ID',
 		displayOptions: { show: enrichOrCheckOps },
 		routing: { send: { type: 'query', property: 'id' } },
+	},
+];
+
+// ── Enrich (Realtime): URL or username only ────────────────────────────
+
+/* Its own group rather than being folded into enrichOrCheckOps, because that
+   group also renders Company ID and Kooperativa ID, and the realtime endpoint
+   accepts neither: an internal id means nothing to a source that has never seen
+   the data lake. Showing them would offer inputs the API rejects. */
+const realtimeOps = {
+	resource: ['company'],
+	operation: ['enrichRealtime'],
+};
+
+export const companyRealtimeFields: INodeProperties[] = [
+	{
+		displayName: 'Profile URL',
+		name: 'linkedinUrl',
+		type: 'string',
+		default: '',
+		placeholder: 'https://www.example.com/company/acme-corp',
+		description: 'Full company profile URL. Provide exactly one of Profile URL or Username.',
+		displayOptions: { show: realtimeOps },
+		routing: { send: { type: 'query', property: 'linkedin_url' } },
+	},
+	{
+		displayName: 'Username',
+		name: 'username',
+		type: 'string',
+		default: '',
+		placeholder: 'argus-media',
+		description: 'Company slug, the part after /company/. Fastest lookup.',
+		displayOptions: { show: realtimeOps },
+		routing: { send: { type: 'query', property: 'username' } },
 	},
 ];
 
@@ -293,6 +340,7 @@ export const companyRelatedFields: INodeProperties[] = [
 export const companyDescription: INodeProperties[] = [
 	companyOperations,
 	...companyEnrichFields,
+	...companyRealtimeFields,
 	...companySearchFields,
 	...companyRelatedFields,
 ];
